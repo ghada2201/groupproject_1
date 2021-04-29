@@ -248,8 +248,8 @@ public class Dashboard3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //Dashboard1 d2 = new Dashboard();
-        //d2.setVisible(true); //the code to connect to dashboard2
+        DASHBOARD2 D2 = new DASHBOARD2();
+        D2.setVisible(true); //the code to connect to dashboard2
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -287,61 +287,16 @@ public class Dashboard3 extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-         try {
-           // Adminpanel1 AP = new Adminpanel1();
-            SignUpIn s = new SignUpIn();
-            //AP.setVisible(true);
-            
-            
-            Connection con = DB.getConnection();
-            Statement stat = null;
-            JTextField email= s.getEmail();
-            String ema = String.valueOf(email);
-            
-            ResultSet userResultSet = UserTable.getloginemail(ema);
-            String sqll = "Select * from User where UserEmail= '" + email +"'";
-            Statement pstt = con.createStatement();
-            ResultSet rss = pstt.executeQuery(sqll);
-            String user = rss.getString("UserType");
-               
-            
-               if (rss.next())  {
-                    pstt.close();
-                     rss.close();
-                 
-       if(userResultSet.next()){
-           
-              if(!user.equalsIgnoreCase("User")){
-                   Adminpanel1 AP = new Adminpanel1();
-                   AP.setVisible(true);
-                  
-                   userResultSet.close();
-                 
-              }
-       
-             
-         else {
-             JOptionPane.showMessageDialog(this,"You dont have permission for admin panel"); 
-            }
-        }
-             else {
-                 JOptionPane.showMessageDialog(this,"login error");
-                     
-                     }
-              }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Dashboard3.class.getName()).log(Level.SEVERE, null, ex);
-          // JOptionPane.showMessageDialog(this,"login error");
-        }
         
+        Adminpanel1 AP = new Adminpanel1();            
+        AP.setVisible(true);
       
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //Dashboard1 d1 = new Dashboard();
-        //d1.setVisible(true); //the code to connect to dashbord 1
+        Dashboard1 d1 = new Dashboard1();
+        d1.setVisible(true); //the code to connect to dashbord 1
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

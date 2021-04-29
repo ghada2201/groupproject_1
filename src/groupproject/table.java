@@ -70,7 +70,7 @@ public class table {
     }
     
     public static void CreateUser() {
-     
+     //for the admidpanal
      Connection connection = DB.getConnection();
         
         String sql = "CREATE TABLE  if not exists UserInfo "
