@@ -34,8 +34,8 @@ public class main {
         
         ReadingData.batchInsert(fileContenta);
         
-        //Dashboard3 BD = new Dashboard3();
-        //BD.setVisible(true);
+        Dashboard3 BD = new Dashboard3();
+        BD.setVisible(true);
         
     }
         

@@ -6,7 +6,14 @@
 package groupproject;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -242,24 +249,24 @@ public class Dashboard3 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //Dashboard1 d2 = new Dashboard();
-        //d2.setVisible(true);
+        //d2.setVisible(true); //the code to connect to dashboard2
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
         DefaultCategoryDataset dod = new DefaultCategoryDataset();
-        dod.setValue(9, "Road Name", "A66");
-        dod.setValue(5, "Road Name", "C");
-        dod.setValue(2, "Road Name", "U");
-        dod.setValue(9, "Road Name", "A171");
-        dod.setValue(15, "Road Name", "A173");
-        dod.setValue(19, "Road Name", "A174");
-        dod.setValue(7, "Road Name", "B1380");
-        dod.setValue(6, "Road Name", "B1269");
-        dod.setValue(4, "Road Name", "A1053");
-        dod.setValue(1, "Road Name", "A1085");
-        dod.setValue(2, "Road Name", "A1042");
+        dod.setValue(9, "Road Type", "A66");
+        dod.setValue(5, "Road Type", "C");
+        dod.setValue(2, "Road Type", "U");
+        dod.setValue(9, "Road Type", "A171");
+        dod.setValue(15, "Road Type", "A173");
+        dod.setValue(19, "Road Type", "A174");
+        dod.setValue(7, "Road Type", "B1380");
+        dod.setValue(6, "Road Type", "B1269");
+        dod.setValue(4, "Road Type", "A1053");
+        dod.setValue(1, "Road Type", "A1085");
+        dod.setValue(2, "Road Type", "A1042");
         
         
         JFreeChart jchart = ChartFactory.createBarChart3D("Road Use Percentage", "Road Type", "Percentage", dod, PlotOrientation.VERTICAL, true, true, false);
@@ -279,14 +286,62 @@ public class Dashboard3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        Adminpanel1 AP = new Adminpanel1();
-        AP.setVisible(true);
+        
+         try {
+           // Adminpanel1 AP = new Adminpanel1();
+            SignUpIn s = new SignUpIn();
+            //AP.setVisible(true);
+            
+            
+            Connection con = DB.getConnection();
+            Statement stat = null;
+            JTextField email= s.getEmail();
+            String ema = String.valueOf(email);
+            
+            ResultSet userResultSet = UserTable.getloginemail(ema);
+            String sqll = "Select * from User where UserEmail= '" + email +"'";
+            Statement pstt = con.createStatement();
+            ResultSet rss = pstt.executeQuery(sqll);
+            String user = rss.getString("UserType");
+               
+            
+               if (rss.next())  {
+                    pstt.close();
+                     rss.close();
+                 
+       if(userResultSet.next()){
+           
+              if(!user.equalsIgnoreCase("User")){
+                   Adminpanel1 AP = new Adminpanel1();
+                   AP.setVisible(true);
+                  
+                   userResultSet.close();
+                 
+              }
+       
+             
+         else {
+             JOptionPane.showMessageDialog(this,"You dont have permission for admin panel"); 
+            }
+        }
+             else {
+                 JOptionPane.showMessageDialog(this,"login error");
+                     
+                     }
+              }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard3.class.getName()).log(Level.SEVERE, null, ex);
+          // JOptionPane.showMessageDialog(this,"login error");
+        }
+        
+      
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Dashboard1 d1 = new Dashboard();
-        //d1.setVisible(true);
+        //d1.setVisible(true); //the code to connect to dashbord 1
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
