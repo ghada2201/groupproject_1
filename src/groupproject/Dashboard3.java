@@ -5,8 +5,16 @@
  */
 package groupproject;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -49,6 +57,7 @@ public class Dashboard3 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -142,6 +151,13 @@ public class Dashboard3 extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Logout");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout whitebackGLayout = new javax.swing.GroupLayout(whitebackG);
         whitebackG.setLayout(whitebackGLayout);
         whitebackGLayout.setHorizontalGroup(
@@ -149,7 +165,9 @@ public class Dashboard3 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, whitebackGLayout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(156, 156, 156))
+                .addGap(31, 31, 31)
+                .addComponent(jButton6)
+                .addGap(28, 28, 28))
             .addGroup(whitebackGLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +190,13 @@ public class Dashboard3 extends javax.swing.JFrame {
         whitebackGLayout.setVerticalGroup(
             whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(whitebackGLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(whitebackGLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(whitebackGLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton6)))
                 .addGap(38, 38, 38)
                 .addGroup(whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(whitebackGLayout.createSequentialGroup()
@@ -199,7 +222,7 @@ public class Dashboard3 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(whitebackG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -226,24 +249,24 @@ public class Dashboard3 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //Dashboard1 d2 = new Dashboard();
-        //d2.setVisible(true);
+        //d2.setVisible(true); //the code to connect to dashboard2
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
         DefaultCategoryDataset dod = new DefaultCategoryDataset();
-        dod.setValue(9, "Road Name", "A66");
-        dod.setValue(5, "Road Name", "C");
-        dod.setValue(2, "Road Name", "U");
-        dod.setValue(9, "Road Name", "A171");
-        dod.setValue(15, "Road Name", "A173");
-        dod.setValue(19, "Road Name", "A174");
-        dod.setValue(7, "Road Name", "B1380");
-        dod.setValue(6, "Road Name", "B1269");
-        dod.setValue(4, "Road Name", "A1053");
-        dod.setValue(1, "Road Name", "A1085");
-        dod.setValue(2, "Road Name", "A1042");
+        dod.setValue(9, "Road Type", "A66");
+        dod.setValue(5, "Road Type", "C");
+        dod.setValue(2, "Road Type", "U");
+        dod.setValue(9, "Road Type", "A171");
+        dod.setValue(15, "Road Type", "A173");
+        dod.setValue(19, "Road Type", "A174");
+        dod.setValue(7, "Road Type", "B1380");
+        dod.setValue(6, "Road Type", "B1269");
+        dod.setValue(4, "Road Type", "A1053");
+        dod.setValue(1, "Road Type", "A1085");
+        dod.setValue(2, "Road Type", "A1042");
         
         
         JFreeChart jchart = ChartFactory.createBarChart3D("Road Use Percentage", "Road Type", "Percentage", dod, PlotOrientation.VERTICAL, true, true, false);
@@ -263,15 +286,83 @@ public class Dashboard3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //Adminpanel AP = new Adminpanel();
-        //AP.setVisible(true);
+        
+         try {
+           // Adminpanel1 AP = new Adminpanel1();
+            SignUpIn s = new SignUpIn();
+            //AP.setVisible(true);
+            
+            
+            Connection con = DB.getConnection();
+            Statement stat = null;
+            JTextField email= s.getEmail();
+            String ema = String.valueOf(email);
+            
+            ResultSet userResultSet = UserTable.getloginemail(ema);
+            String sqll = "Select * from User where UserEmail= '" + email +"'";
+            Statement pstt = con.createStatement();
+            ResultSet rss = pstt.executeQuery(sqll);
+            String user = rss.getString("UserType");
+               
+            
+               if (rss.next())  {
+                    pstt.close();
+                     rss.close();
+                 
+       if(userResultSet.next()){
+           
+              if(!user.equalsIgnoreCase("User")){
+                   Adminpanel1 AP = new Adminpanel1();
+                   AP.setVisible(true);
+                  
+                   userResultSet.close();
+                 
+              }
+       
+             
+         else {
+             JOptionPane.showMessageDialog(this,"You dont have permission for admin panel"); 
+            }
+        }
+             else {
+                 JOptionPane.showMessageDialog(this,"login error");
+                     
+                     }
+              }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Dashboard3.class.getName()).log(Level.SEVERE, null, ex);
+          // JOptionPane.showMessageDialog(this,"login error");
+        }
+        
+      
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Dashboard1 d1 = new Dashboard();
-        //d1.setVisible(true);
+        //d1.setVisible(true); //the code to connect to dashbord 1
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        SignUpIn s = new SignUpIn();
+        
+         JTextField y = s.getEmail();
+         String e = y.getText();
+         
+     
+        LocalTime logOutTime = LocalTime.now();
+        UserTable.insertUserLogoutActivity(e,s.LocalD,s.randomID,s.logInTime,logOutTime); 
+        
+        
+              
+         
+        SignUpIn p = new SignUpIn();
+                p.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +405,7 @@ public class Dashboard3 extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
