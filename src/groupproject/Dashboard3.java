@@ -5,8 +5,9 @@
  */
 package groupproject;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.time.LocalTime;
+import javax.swing.JTextField;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -49,6 +50,7 @@ public class Dashboard3 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -142,6 +144,13 @@ public class Dashboard3 extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("Logout");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout whitebackGLayout = new javax.swing.GroupLayout(whitebackG);
         whitebackG.setLayout(whitebackGLayout);
         whitebackGLayout.setHorizontalGroup(
@@ -149,7 +158,9 @@ public class Dashboard3 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, whitebackGLayout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(156, 156, 156))
+                .addGap(31, 31, 31)
+                .addComponent(jButton6)
+                .addGap(28, 28, 28))
             .addGroup(whitebackGLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,8 +183,13 @@ public class Dashboard3 extends javax.swing.JFrame {
         whitebackGLayout.setVerticalGroup(
             whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(whitebackGLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(whitebackGLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(whitebackGLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton6)))
                 .addGap(38, 38, 38)
                 .addGroup(whitebackGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(whitebackGLayout.createSequentialGroup()
@@ -199,7 +215,7 @@ public class Dashboard3 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(whitebackG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -263,8 +279,8 @@ public class Dashboard3 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        //Adminpanel AP = new Adminpanel();
-        //AP.setVisible(true);
+        Adminpanel1 AP = new Adminpanel1();
+        AP.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -272,6 +288,26 @@ public class Dashboard3 extends javax.swing.JFrame {
         //Dashboard1 d1 = new Dashboard();
         //d1.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        SignUpIn s = new SignUpIn();
+        
+         JTextField y = s.getEmail();
+         String e = y.getText();
+         
+     
+        LocalTime logOutTime = LocalTime.now();
+        UserTable.insertUserLogoutActivity(e,s.LocalD,s.randomID,s.logInTime,logOutTime); 
+        
+        
+              
+         
+        SignUpIn p = new SignUpIn();
+                p.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +350,7 @@ public class Dashboard3 extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

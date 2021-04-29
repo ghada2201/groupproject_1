@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class ReadingData {
     
-    
+    private static final Connection connection = DB.getConnection();
     public static void insert(int id, String direction_of_travel, int year, String count_date, int hour, int region_id, String region_name, int local_authority_id, 
             String local_authority_name, String road_name, String road_type, String start_junction_road_name, String end_junction_road_name, int easting,
                     int northing,
@@ -39,7 +39,7 @@ public class ReadingData {
                     int all_hgvs,
                     int all_motor_vehicles){
             
-        Connection connection = DB.getConnection();
+        
         
         String sql = "INSERT INTO rawcount_local_authority ("
                 + "id, "

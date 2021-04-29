@@ -8,7 +8,6 @@ package groupproject;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
@@ -22,7 +21,7 @@ public class table {
     
     String sql = "CREATE TABLE  if not exists rawcount_local_authority"
                 + "("
-                    + "id   INTEGER PRIMARY KEY,"
+                    + "id   INTEGER,"
                     + "direction_of_travel  VARCHAR (15),"
                     + "year INTEGER,"
                     + "count_date   DATE,"
@@ -67,8 +66,32 @@ public class table {
             System.out.println("Error creating the Table" + ex.getMessage());
             
         }
+      
     }
     
-    
-    
+    public static void CreateUser() {
+     
+     Connection connection = DB.getConnection();
+        
+        String sql = "CREATE TABLE  if not exists UserInfo "
+                + "("
+                    + "id INTEGER PRIMARY KEY,"
+                    + "First Name VARCHAR (15),"
+                    + "Last Name  VARCHAR (15),"
+                    + "Email      VARCHAR (50),"
+                    + "Date Joined  Date"
+                + ")" ;
+        
+        try 
+        {
+            Statement  sqlStatement =  connection.createStatement();
+            sqlStatement.executeUpdate(sql);
+             System.out.println(" User Table created");
+         } 
+        catch (SQLException ex) 
+        {
+            System.out.println("Error creating UserTable" + ex.getMessage());
+            
+        }
+    }
 }

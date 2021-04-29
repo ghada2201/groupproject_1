@@ -20,7 +20,7 @@ public class CSVReader {
         
         try {
             FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
             
             String line = "";
             
